@@ -5,7 +5,7 @@ interface IUser {
 	updateAge(age: number): User | Error;
 }
 
-type CreateUserInput = {
+export type CreateUserInput = {
 	firstname: string;
 	lastname: string;
 	age: number;
