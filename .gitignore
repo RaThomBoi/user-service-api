@@ -24,4 +24,5 @@ settings*.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# m
+# env
+.env
