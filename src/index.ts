@@ -52,7 +52,7 @@ app.post("/user", async (req: Request, res: Response) => {
 	}
 });
 
-app.delete("/user/id", async (req: Request, res: Response) => {
+app.delete("/user/:id", async (req: Request, res: Response) => {
 	const userId = req.params.id;
 
 	try {
