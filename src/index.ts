@@ -26,7 +26,7 @@ app.get("/users", async (req, res) => {
 	res.json(users);
 });
 
-app.post("/user", async (req: Request, res) => {
+app.post("/user", async (req: Request, res: Response) => {
 	const { body }: { body: CreateUserInput } = req;
 	const newUserOrError = User.create(body);
 
@@ -49,6 +49,23 @@ app.post("/user", async (req: Request, res) => {
 		res
 			.status(500)
 			.json({ error: "An error occurred while creating the user" });
+	}
+});
+
+app.delete("/user/id", async (req: Request, res: Response) => {
+	const userId = req.params.id;
+
+	try {
+		const deletedUser = await prisma.user.delete({
+			where: {
+				id: userId,
+			},
+		});
+		res.json(deletedUser);
+	} catch (error) {
+		res
+			.status(500)
+			.json({ error: "An error occurred while deleting the user" });
 	}
 });
 
