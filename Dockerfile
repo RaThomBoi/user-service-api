@@ -1,8 +1,5 @@
 FROM node:18-alpine
 
-# specify essential env value
-ENV DATABASE_URL=postgresql://user:admin@localhost:5100/server?schema=user-service
-
 # create directory inside container
 RUN mkdir ./app
 
