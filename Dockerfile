@@ -18,6 +18,9 @@ COPY . .
 # Build TypeScript code within container on /app directory
 RUN npm run build
 
+# Generate Prisma client
+RUN npx prisma generate
+
 # Set working directory to the compiled code directory
 WORKDIR /app/dist
 
