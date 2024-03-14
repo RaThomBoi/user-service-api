@@ -1,14 +1,25 @@
 FROM node:18-alpine
 
-# create directory inside container
+# Create directory inside container
 RUN mkdir ./app
 
-COPY . ./app
+# Set working directory
+WORKDIR /app
 
-WORKDIR /app/dist
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# install dependencies
+# Install dependencies
 RUN npm install
 
-# this command will be executed on WORKDIR
+# Copy the rest of the application code
+COPY . .
+
+# Build TypeScript code within container on /app directory
+RUN npm run build
+
+# Set working directory to the compiled code directory
+WORKDIR /app/dist
+
+# Command to run the application
 CMD ["node", "index.js"]
