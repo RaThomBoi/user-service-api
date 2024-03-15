@@ -25,3 +25,5 @@ settings*.json
 !.vscode/extensions.json
 
 *coverage
+
+node_modules

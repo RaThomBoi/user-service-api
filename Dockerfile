@@ -6,8 +6,8 @@ RUN mkdir ./app
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package.json and package-lock.json into /app
+COPY package*.json .
 
 # Install dependencies
 RUN npm install
