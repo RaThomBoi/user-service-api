@@ -24,6 +24,7 @@ RUN npx prisma generate
 # Set working directory to the compiled code directory
 WORKDIR /app/dist
 
+# document for inform whoever using this Dockerfile, this app is listening to port 3100.
 EXPOSE 3100
 
 # Command to run the application
