@@ -24,5 +24,7 @@ RUN npx prisma generate
 # Set working directory to the compiled code directory
 WORKDIR /app/dist
 
+EXPOSE 3100
+
 # Command to run the application
 CMD ["node", "index.js"]
