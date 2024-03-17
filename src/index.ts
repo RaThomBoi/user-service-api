@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3100;
 
 app.get("/", (req, res) => {
 	res.send("Welcome to user-service-api, test edit code");
+	// test
 });
 
 app.get("/users", async (req, res) => {
