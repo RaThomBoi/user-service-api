@@ -28,7 +28,7 @@ COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
 # Set the entrypoint
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
 # document for inform whoever using this Dockerfile, this app is listening to port 3100.
 EXPOSE 3100
