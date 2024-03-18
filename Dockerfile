@@ -22,7 +22,7 @@ RUN npm run build
 RUN npx prisma generate
 
 # Set working directory to the compiled code directory
-WORKDIR /app/dist
+WORKDIR /app
 
 # Copy the entrypoint script into /app
 COPY entrypoint.sh .

@@ -6,6 +6,7 @@ cd /app
 
 # Run Prisma migrations
 npx prisma db push
+echo "prisma db push done."
 
 # Change working directory to /app/dist
 cd /app/dist
