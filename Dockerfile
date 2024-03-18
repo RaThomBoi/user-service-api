@@ -21,14 +21,19 @@ RUN npm run build
 # Generate Prisma client
 RUN npx prisma generate
 
-# Sync schema to DB
-RUN npx prisma db push
-
 # Set working directory to the compiled code directory
 WORKDIR /app/dist
+
+# Copy the entrypoint script into /app
+COPY entrypoint.sh .
+
+# Make the entrypoint script executable
+RUN chmod +x entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["entrypoint.sh"]
 
 # document for inform whoever using this Dockerfile, this app is listening to port 3100.
 EXPOSE 3100
 
-# Command to run the application
-CMD ["node", "index.js"]
+
