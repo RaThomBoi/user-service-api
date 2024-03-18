@@ -11,6 +11,7 @@ echo "prisma db push done."
 cd /app/dist
 echo "cd to /app/dist"
 
+# Set working directory to the compiled code directory
 # Run the main application in the background
 echo "running node index.js"
 (node index.js &)
