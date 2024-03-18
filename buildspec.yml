@@ -1,0 +1,43 @@
+version: 0.2
+
+phases:
+  install:
+    # runtime-versions: aws codebuild defaultly provide docker engine to us, so we can omit this field
+    #   node:
+    commands:
+      - echo Build project triggered
+      - NOW=$(date +"%d-%m-%Y_%H:%M:%S") # Adjusted timestamp format
+      - echo Timestamp = $NOW
+
+  pre_build:
+    commands:
+      - echo docker --version = $(docker --version)
+      - echo Logging into ECR...
+      - echo AWS version = $(aws --version)
+      # todo store ecr password in parameter store
+      - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 720133173047.dkr.ecr.ap-southeast-1.amazonaws.com
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      # check if variables are defined.
+      - echo IMAGE_TAG = $IMAGE_TAG
+      - echo REPOSITORY_URI = $REPOSITORY_URI
+
+  build:
+    commands:
+      - echo Build started on $(date)
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo Docker image building is completed.
+      - echo Pushing images to ECR...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo Writing image definitions file...
+      - printf '[{"name":"user-service-api-latest","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
