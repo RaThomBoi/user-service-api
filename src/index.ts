@@ -15,8 +15,7 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT || 3100;
 
 app.get("/", (req, res) => {
-	res.send("Welcome to user-service-api, test edit code");
-	// test
+	res.send("Welcome to user-service-api, currently run on AWS ECS Fargate.");
 });
 
 app.get("/users", async (req, res) => {
