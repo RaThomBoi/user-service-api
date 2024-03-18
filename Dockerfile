@@ -21,6 +21,9 @@ RUN npm run build
 # Generate Prisma client
 RUN npx prisma generate
 
+# Sync schema to DB
+RUN npx prisma db push
+
 # Set working directory to the compiled code directory
 WORKDIR /app/dist
 
